@@ -43,7 +43,7 @@ expandLine (Line (x1, y1) (x2, y2)) = zipLong (range x1 x2) (range y1 y2)
     where zipLong [a] [b]       = [(a, b)]
           zipLong [a] (b:bs)    = (a, b) : zipLong [a] bs
           zipLong (a:as) [b]    = (a, b) : zipLong as [b]
-          zipLong (a:as) (b:bs) = (a,b) : zipLong as bs
+          zipLong (a:as) (b:bs) = (a, b) : zipLong as bs
 
           range a b | a == b = [a]
           range a b | a > b  = a : range (a-1) b
