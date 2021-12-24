@@ -26,7 +26,7 @@ instance (Show Display) where
     show (Display m) = ("\n" ++ ) $ (++ "\n") $ intercalate "\n" $ map (concatMap ((:[]) . snd)) $ groupWith (\((a,_),_) -> a) $ M.toList m'
         where m' = M.union (M.map showCell m) emptyMap
               showCell (Cell _ Nothing) = '.'
-              showCell (Cell _ (Just ambi)) = showAmbi ambi
+              showCell (Cell _ (Just amphi)) = showAmbi amphi
               showAmbi Amber  = 'A'
               showAmbi Bronze = 'B'
               showAmbi Copper = 'C'
