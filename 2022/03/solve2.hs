@@ -3,12 +3,12 @@ import           Data.List.Split (chunksOf)
 import qualified Data.Set as S
 import           Data.Tuple.Extra (both)
 
-type Rucksack = [S.Set Char]
+type ElfGroup = [S.Set Char]
 
-parseLines :: String -> [Rucksack]
+parseLines :: String -> [ElfGroup]
 parseLines = map (map S.fromList) . chunksOf 3 . lines
 
-findOverlap :: Rucksack -> Char
+findOverlap :: ElfGroup -> Char
 findOverlap rs = common
     where [common] = S.elems $ foldr1 S.intersection rs
 
