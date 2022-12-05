@@ -29,7 +29,6 @@ parseOps = map (runParser parseInstruction)
 parseStacks ls = map (dropWhile isSpace) ls''
     where ls' = init ls
           ls'' = transpose $ map (map snd . filter (\(n, _) -> (n - 1) `mod` 4 == 0) . zip [0..]) ls'
-          piles = map (const []) $ words $ last ls
 
 parseInput ls = (parseStacks stacks, parseOps ops)
     where [stacks, ops] = wordsBy null ls
