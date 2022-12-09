@@ -20,8 +20,7 @@ dist (a, b) (c, d) = max (abs (a-c)) (abs (b-d))
 follow :: Point -> Point -> Point
 follow p1 p2 | dist p1 p2 < 2 = p1
 follow (a, b) (c, d) = (diff a c, diff b d)
-    where diff x y | x /= y = x + signum (y-x)
-                   | x == y = x
+    where diff x y = x + signum (y-x)
 
 simulate :: Point -> Point -> [Direction] -> (Point, Point, S.Set Point)
 simulate head tail = foldl sim' init
