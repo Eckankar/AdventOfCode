@@ -7,12 +7,9 @@ data Instruction = Noop | AddX Int
 parseInstruction "noop" = Noop
 parseInstruction ('a':'d':'d':'x':' ':n) = AddX $ read n
 
-evaluateProgram = reverse . snd . foldl evaluateInstruction init
-    where init = ((0, 1), [])
-          evaluateInstruction ((ic, x), ss) i =
-            case i of
-                Noop   -> ((ic+1, x), (ic+1, x):ss)
-                AddX n -> ((ic+2, x+n), (ic+2, x):(ic+1, x):ss)
+evaluateProgram = zip [1..] . reverse . snd . foldl evaluateInstruction (1, [])
+    where evaluateInstruction (x, ss) Noop     = (x,     x:ss)
+          evaluateInstruction (x, ss) (AddX n) = (x+n, x:x:ss)
 
 toPixel (i, x) = if abs (iPos - x) <= 1 then '#' else '.'
     where iPos = (i-1) `mod` 40
