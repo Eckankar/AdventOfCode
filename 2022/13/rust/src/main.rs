@@ -24,17 +24,13 @@ impl PartialOrd for NList {
     }
 }
 
-fn vecify(l: Vec<NList>) -> Vec<NList> {
-    l
-}
-
 impl Ord for NList {
     fn cmp(&self, other: &Self) -> Ordering {
         match (self, other) {
             (NList::NNum(v1),  NList::NNum(v2))  => v1.cmp(v2),
             (NList::NList(v1), NList::NList(v2)) => v1.cmp(v2),
-            (v1,               NList::NList(v2)) => vecify(vec![v1.clone()]).cmp(&v2),
-            (NList::NList(v1), v2)               => v1.cmp(&vecify(vec![v2.clone()]))
+            (v1,               NList::NList(v2)) => vec![v1.clone()].cmp(&v2),
+            (NList::NList(v1), v2)               => v1.cmp(&vec![v2.clone()])
         }
     }
 }
