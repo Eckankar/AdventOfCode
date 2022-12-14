@@ -1,5 +1,5 @@
 import qualified Data.Map as M
-import qualified Data.Set as S
+import qualified Data.HashSet as S
 
 import Control.Applicative ((<$>), Applicative(..), Alternative((<|>)))
 import Data.Char (isDigit)
@@ -37,7 +37,7 @@ updateMinMax (a, b) m = M.alter (updateIfBetter b) a m
 generateMinMaxCol :: [Pair] -> M.Map Int (Int, Int)
 generateMinMaxCol = foldr updateMinMax M.empty
 
-dropSand :: Pair -> Maybe (S.Set Pair, M.Map Int (Int, Int)) -> Maybe (S.Set Pair, M.Map Int (Int, Int))
+dropSand :: Pair -> Maybe (S.HashSet Pair, M.Map Int (Int, Int)) -> Maybe (S.HashSet Pair, M.Map Int (Int, Int))
 dropSand _ Nothing = Nothing
 dropSand p@(dropX, dropY) (Just (points, colMinMaxs))
         | S.member p points = Nothing
@@ -55,5 +55,5 @@ main :: IO ()
 main = do
     input <- fmap (map (runParser parseInputLine) . lines) getContents
     let initMap = S.fromList $ concatMap expandLines input
-    let initMinMaxCol = generateMinMaxCol $ S.elems initMap
+    let initMinMaxCol = generateMinMaxCol $ S.toList initMap
     print $ length $ catMaybes $ takeWhile isJust $ tail $ iterate (dropSand (500, 0)) $ Just (initMap, initMinMaxCol)

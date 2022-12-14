@@ -1,7 +1,7 @@
 {-# LANGUAGE TupleSections #-}
 
 import qualified Data.Map as M
-import qualified Data.Set as S
+import qualified Data.HashSet as S
 
 import Control.Applicative ((<$>), Applicative(..), Alternative((<|>)))
 import Data.Char (isDigit)
@@ -39,7 +39,7 @@ updateMinMax (a, b) m = M.alter (updateIfBetter b) a m
 generateMinMaxCol :: [Pair] -> M.Map Int (Int, Int)
 generateMinMaxCol = foldr updateMinMax M.empty
 
-dropSand :: Pair -> Int -> Maybe (S.Set Pair, M.Map Int (Int, Int)) -> Maybe (S.Set Pair, M.Map Int (Int, Int))
+dropSand :: Pair -> Int -> Maybe (S.HashSet Pair, M.Map Int (Int, Int)) -> Maybe (S.HashSet Pair, M.Map Int (Int, Int))
 dropSand _ _ Nothing = Nothing
 dropSand p@(dropX, dropY) floorY vs@(Just (points, colMinMaxs))
         | S.member p points = Nothing
@@ -59,7 +59,7 @@ main :: IO ()
 main = do
     input <- fmap (map (runParser parseInputLine) . lines) getContents
     let initMap' = S.fromList $ concatMap expandLines input
-    let floorY = (2+) $ maximum $ map snd $ S.elems initMap'
+    let floorY = (2+) $ maximum $ map snd $ S.toList initMap'
     let initMap = S.union initMap' $ S.map ((, floorY) . fst) initMap'
-    let initMinMaxCol = generateMinMaxCol $ S.elems initMap
+    let initMinMaxCol = generateMinMaxCol $ S.toList initMap
     print $ length $ catMaybes $ takeWhile isJust $ tail $ iterate (dropSand (500, 0) floorY) $ Just (initMap, initMinMaxCol)
