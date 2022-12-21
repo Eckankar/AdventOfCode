@@ -75,6 +75,7 @@ peelBack (ECmp e1 e2) = peelBack' e1 e2
           peelBack' (EOp '-' (EConst n) e) (EConst m) = peelBack' e (EConst (-m + n))
           peelBack' (EOp '*' e (EConst n)) (EConst m) = peelBack' e (EConst (m `div` n))
           peelBack' (EOp '/' e (EConst n)) (EConst m) = peelBack' e (EConst (m * n))
+          peelBack' (EOp '/' (EConst n) e) _ = error "Let's hope this case doesn't come up"
           peelBack' (EOp op (EConst n) e) (EConst m)  = peelBack' (EOp op e (EConst n)) (EConst m)
           peelBack' e1 e2 = ECmp e1 e2
 
