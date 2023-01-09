@@ -23,8 +23,8 @@ runProgram rv pc (p, d) =
           argA o = p M.! (pc + o + 1)
           arg o = imm (ms !! o) $ argA o
 
-          imm 0 n = (p M.! n )
-          imm 1 n = id n
+          imm 0 = (p M.!)
+          imm 1 = id
 
           binOp f = (M.insert (argA 2) (f (arg 0) (arg 1)) p, d)
 
