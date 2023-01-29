@@ -53,8 +53,8 @@ simplifyExpr e = if e == e' then e else simplifyExpr e'
           simplifyExpr' (Mul (Const n1) (Const n2)) = Const (n1*n2)
           simplifyExpr' (Neg (Const n)) = Const (-n)
 
-          simplifyExpr' (Add (Const n1) e) = simplifyExpr (Add e (Const n1))
-          simplifyExpr' (Mul (Const n1) e) = simplifyExpr (Mul e (Const n1))
+          simplifyExpr' (Add (Const n1) e) = simplifyExpr' (Add e (Const n1))
+          simplifyExpr' (Mul (Const n1) e) = simplifyExpr' (Mul e (Const n1))
 
           simplifyExpr' (Add (Add e (Const n1)) (Const n2)) = Add e (Const (n1+n2))
           simplifyExpr' (Mul (Add e1 e2) (Const n)) = Add (Mul e1 (Const n)) (Mul e2 (Const n))
