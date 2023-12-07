@@ -27,12 +27,11 @@ def handType(hand, jacksWild=False):
     if jacksWild and 'J' in cardCount:
         jackCount = cardCount['J']
         del cardCount['J']
-        vs = sorted( cardCount.values() )
 
-        match cardCount['J']:
+        match jackCount:
             case 5: return Hand.FiveKind
             case 4: return Hand.FiveKind
-            case 3: return (FiveKind if vs == [2] else FourKind)
+            case 3: return (Hand.FiveKind if len(cardCount.values()) == 1 else Hand.FourKind)
             case _: return max( handType(hand2, jacksWild=False) for hand2 in removeJacks(hand) )
 
     vs = sorted( cardCount.values() )
