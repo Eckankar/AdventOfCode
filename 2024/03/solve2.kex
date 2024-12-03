@@ -1,0 +1,12 @@
+main := output "0"
+
+output := ~/don't\(\)/ noOutput
+        | ~/mul\(/ num ~/,/ " * " num ~/\)/ " + " output
+        | ~/./ output
+        | 1
+
+noOutput := ~/do\(\)/ output
+          | ~/./ noOutput
+          | 1
+
+num := /[0-9]+/
