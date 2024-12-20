@@ -15,8 +15,7 @@ emptyTrie = Trie False M.empty
 addToTrie t s = add' t s
     where add' (Trie _ m) []     = Trie True m
           add' (Trie b m) (s:ss) = Trie b $ M.alter update s m
-            where t' = M.alter update s m
-                  update mt = Just $ add' (toTrie mt) ss
+            where update mt = Just $ add' (toTrie mt) ss
 
                   toTrie Nothing = emptyTrie
                   toTrie (Just t) = t
