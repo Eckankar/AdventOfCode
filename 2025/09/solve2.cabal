@@ -1,0 +1,19 @@
+cabal-version:      3.6
+name:               solve2
+version:            0.1.0.0
+
+license:            MIT
+license-file:       ../../LICENSE
+author:             Sebastian Paaske Tørholm
+
+executable solve2
+    main-is: solve2.hs
+
+    build-depends:    base >= 4 && < 5,
+                      hgeometry,
+                      hgeometry-combinatorial,
+                      parallel
+
+    hs-source-dirs:   .
+    default-language: GHC2021
+    ghc-options:      -O2 -threaded -rtsopts -with-rtsopts=-N12

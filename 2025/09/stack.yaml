@@ -1,0 +1,9 @@
+resolver: lts-20.26
+
+packages:
+- .
+
+extra-deps:
+  - hgeometry-0.14@sha256:9a2328827b29199acbb18d27f22698b6d1a9ee6187d8519d1a6ed9c4a4315d3d,15615
+  - hgeometry-combinatorial-0.14@sha256:d7a23a48f872eabdc74dfb710c2c17c21e7c3df9cbc6130d24fc2321c45115c4,9556
+  - vector-circular-0.1.4@sha256:e907071334712144e43279aaf0f2d37da183604df723df2cf85ec745d13ccffd,1493
