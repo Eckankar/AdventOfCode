@@ -1,0 +1,7 @@
+resolver: lts-21.15
+
+packages:
+- .
+
+extra-deps:
+- memoize-1.1.2@sha256:d7701b55ed63434d1e8b507d0a76bb58f2fe31b7ce329132e1ca808c7001da49,1928
